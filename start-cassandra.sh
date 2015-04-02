@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source /etc/mastodonc/docker-functions
+
 CONFIG_FILE=/apache-cassandra/conf/cassandra.yaml
 
 LISTEN_ADDRESS=${CASSANDRA_LISTEN_ADDRESS:-$(hostname -i)}
@@ -46,4 +48,6 @@ sed -i \
 
 echo -e "data_file_directories:\n${YML_INDENT}- ${DATA_DIRS}" >> ${CONFIG_FILE}
 
-/apache-cassandra/bin/cassandra -f
+ensure_rsyslogd_running && \
+    ensure_jstatd_running && \
+    /apache-cassandra/bin/cassandra -f
