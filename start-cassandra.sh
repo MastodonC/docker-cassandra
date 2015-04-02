@@ -27,7 +27,7 @@ else
 	mkdir -p ${thedir}
 	ddirs+=("${thedir}")
     done
-    DATA_DIRS=$(join "\n${YML_INDENT}-" ${ddirs[@]})
+    DATA_DIRS=$(join "\n${YML_INDENT}- " ${ddirs[@]})
 fi
 
 echo "CASSANDRA_LISTEN_ADDRESS is ${CASSANDRA_LISTEN_ADDRESS}"
